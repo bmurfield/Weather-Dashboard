@@ -38,7 +38,7 @@ class HistoryService {
   });
   }
 
-  
+
   // TODO Define an addCity method that adds a city to the searchHistory.json file
   async addCity(city: string) {
     if (!city) {
