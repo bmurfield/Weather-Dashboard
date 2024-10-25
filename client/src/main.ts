@@ -35,32 +35,18 @@ API Calls
 */
 
 const fetchWeather = async (cityName: string) => {
+  const response = await fetch('/api/weather/search', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ cityName }),
+  });
 
-  try {
-    const response = await fetch('/api/weather/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ cityName }),
-    });
+  const weatherData = await response.json();
 
-            if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
-        }
-  
-    const weatherData = await response.json();
-  
-    console.log('weatherData: ', weatherData);
-
-    renderCurrentWeather(weatherData[0]);SpeechSynthesisEvent
-    renderForecast(weatherData.slice(1));
-  } catch (err) {
-    console.error('hello im an err', err)
-  }
- 
-
-
+  renderCurrentWeather(weatherData[0]);
+  renderForecast(weatherData.slice(1));
 };
 
 const fetchSearchHistory = async () => {
@@ -269,9 +255,11 @@ const handleSearchFormSubmit = (event: any): void => {
   }
 
   const search: string = searchInput.value.trim();
+
   fetchWeather(search).then(() => {
     getAndRenderHistory();
   });
+
   searchInput.value = '';
 };
 
@@ -294,10 +282,11 @@ Initial Render
 
 */
 
-const getAndRenderHistory = () =>
+const getAndRenderHistory = () => {
   fetchSearchHistory().then(renderSearchHistory);
 
-searchForm?.addEventListener('submit', handleSearchFormSubmit);
-searchHistoryContainer?.addEventListener('click', handleSearchHistoryClick);
+  searchForm?.addEventListener('submit', handleSearchFormSubmit);
+  searchHistoryContainer?.addEventListener('click', handleSearchHistoryClick);
+}
 
 getAndRenderHistory();
