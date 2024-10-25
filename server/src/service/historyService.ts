@@ -25,7 +25,7 @@ class HistoryService {
   return await fs.writeFile('db/db.json', JSON.stringify(cities, null, '\t'))
 }
   // TODO: Define a getCities method that reads the cities from the searchHistory.json file and returns them as an array of City objects
-  async getCities() {
+  async getCities(): Promise<City[]> {
   return await this.read().then((cities) => {
     let parsedCities: City[];
     try {
@@ -49,9 +49,9 @@ class HistoryService {
     return await this.getCities()
       .then((cities) => {
         if (cities.find((index) => index.name === city)) {
-          return city;
+          return cities;
         }
-        return [...city, newCity];
+        return [...cities, newCity];
       })
       .then((updatedCities) => this.write(updatedCities))
       .then(() => newCity);
@@ -60,7 +60,8 @@ class HistoryService {
   async removeCity(id: string) {
     return await this.getCities()
       .then((cities) => cities.filter((city) => city.id !== id))
-  }   .then((filteredCities) => this.write(filteredCities));
+     .then((filteredCities) => this.write(filteredCities));
+    }
 }
 
 export default new HistoryService();

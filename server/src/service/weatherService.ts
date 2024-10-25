@@ -1,38 +1,66 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-// TODO: Define an interface for the Coordinates object
-interface Coordinates {
-  city: string;
-  lat?: number;
-  long?: number;
-}
 // TODO: Define a class for the Weather object
+class Weather {
+  city: string;
+  date: string;
+  icon: string;
+  iconDescription: string;
+  tempF: number;
+  windSpeed: number;
+  humidity: number;
+
+constructor (city:string, date:string, icon:string, iconDescription:string, tempF:number, windSpeed:number, humidity: number) {
+  this.city= city
+  this.date=date
+  this.icon=icon
+  this.iconDescription= iconDescription
+  this.tempF=tempF
+  this.windSpeed=windSpeed
+  this.humidity=humidity
+}
+
+}
 
 // TODO: Complete the WeatherService class
 class WeatherService {
   // TODO: Define the baseURL, API key, and city name properties
-  private baseURL?: string;
-  private API_KEY?: string;
-  private city?: '';
+  private baseURL?: string = `http://api.openweathermap.org/data/2.5/`
+  private API_KEY?: string = process.env.API_KEY
+  private city?: string = ''
 
   // TODO: Create buildWeatherQuery method
-  private buildWeatherQuery(coordinates: string): string {
-  const URL= `http://api.openweathermap.org/data/2.5/forecast?q=${coordinates}&appid=${process.env.API_KEY}`
+  private buildWeatherQuery(city: string): string {
+  const URL= `${this.baseURL}forecast?q=${city}&appid=${this.API_KEY}&units=imperial`
+  return URL
+}
+
+private buildCurrentQuery(city: string): string {
+  const URL = `${this.baseURL}data/2.5/weather?q=${city}&appid=${this.API_KEY}&units=imperial`
   return URL
 }
   // TODO: Create fetchWeatherData method
-   async fetchWeatherData(coordinates: string) {
-    const responseData = await fetch(this.buildWeatherQuery(coordinates))
-    return responseData.json()
+   async fetchWeatherData(city: string) {
+    const forecast = await fetch(this.buildWeatherQuery(city))
+    const current = await fetch(this.buildCurrentQuery(city))
+
+    const forecastData= await forecast.json()
+    const currentData= await current.json()
+  
+    this.parseCurrentWeather({forecastData, currentData})
   }
   // TODO: Build parseCurrentWeather method
-  // private parseCurrentWeather(response: any) {}
+  private parseCurrentWeather(response: any) {
+    
+  }
   // TODO: Complete buildForecastArray method
-  // private buildForecastArray(currentWeather: Weather, weatherData: any[]) {}
+  private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
+
+  }
   // TODO: Complete getWeatherForCity method
   async getWeatherForCity(city: string) {
-    // this.city=city
+    this.city=city
     const location = await this.fetchWeatherData(city);
     console.log (location)
   }
