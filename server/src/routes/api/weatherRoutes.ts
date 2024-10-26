@@ -15,16 +15,19 @@ console.log(process.env.API_BASE_URL);
 // TODO: POST Request with city name to retrieve weather data  
 // TODO: GET weather data from city name 
 
-router.post('/search', async (_req: Request, res: Response) => {
-  const city = _req.body.cityName
+router.post('/search', async (req: Request, res: Response) => {
+  const city = req.body.cityName
   console.log('city', city)
   HistoryService.addCity(city)
 try{
   const weatherData = await weatherService.fetchWeatherData(city)
-  console.log(weatherData)
+  //   console.log("********************************************")
+  // console.log(weatherData)
+  res.json (weatherData)
 } catch (err){
   res.status(401).json(err)
   console.error(`Failed to search for city: ${city}`, err)}
+
 
 
 // TODO: save city to search history
