@@ -1,15 +1,15 @@
 # Weather-Dashboard
 
 ## Description
-A deployed webpage that uses weather apis to show accurate forecast data for multiple cities.
+A deployed webpage that uses Weather APIs to show accurate forecast data for multiple cities.
 
-* Wanted to make an iteractive website that shows current and future weather in cities arouns the world.
+* Wanted to make an iteractive website that shows current and future weather in cities around the world.
 
 * Creates a webpage where the user types in a city and it outputs the current weather and 5 day forecast.
 
 * It also stores previously searced cities if you would like review them.
 
-* In this project I learned how to implement a weather API. This was my first project working with an API Key and .env file.
+* In this project I learned how to implement a Weather API. This was my first project working with an API Key and .env file.
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ Link to deployed website: https://weather-dashboard-11tr.onrender.com/
 
 ## Usage
 
-The website can be used to search for weather in many major cities around the globe. USer only needs to input the city and press the submit button. The response created includes the current weather and a 5 day forecast for the respective city. 
+The website can be used to search for weather in many major cities around the globe. User only needs to input the city and press the submit button. The response created includes the current weather and a 5 day forecast for the respective city. The user can also view previously searched cities in the sidebar, and delete those cities using the red trashcan button.
 
 ## Credits
 
