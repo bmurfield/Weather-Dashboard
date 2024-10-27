@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-// TODO: Define a class for the Weather object
+// Defines a class for the Weather object
 class Weather {
   city: string;
   date: string;
@@ -11,6 +11,7 @@ class Weather {
   windSpeed: number;
   humidity: number;
 
+  // Constructs the weather object
   constructor(
     city: string,
     date: string,
@@ -30,14 +31,14 @@ class Weather {
   }
 }
 
-// TODO: Complete the WeatherService class
+// Completes the WeatherService class
 class WeatherService {
-  // TODO: Define the baseURL, API key, and city name properties
+  // Defines the baseURL, API key, and city name properties
   private baseURL?: string = `http://api.openweathermap.org/data/2.5/`;
   private API_KEY?: string = process.env.API_KEY;
   private city = "";
 
-  // TODO: Create buildWeatherQuery method
+  // Creates buildWeatherQuery method
   private buildWeatherQuery(city: string): string {
     const URL = `${this.baseURL}forecast?q=${city}&appid=${this.API_KEY}&units=imperial`;
     return URL;
@@ -47,7 +48,7 @@ class WeatherService {
     const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}&units=imperial`;
     return URL;
   }
-  // TODO: Create fetchWeatherData method
+  // Creates fetchWeatherData method
   async fetchWeatherData(city: string) {
     const forecastResponse = await fetch(this.buildWeatherQuery(city));
     const currentResponse = await fetch(this.buildCurrentQuery(city));
@@ -66,7 +67,7 @@ class WeatherService {
     console.log("Forecast:", forecastArray);
     return { currentWeather, forecastArray };
   }
-  // TODO: Build parseCurrentWeather method
+  // Builds parseCurrentWeather method
   private parseCurrentWeather(currentData: any): Weather {
     return new Weather(
       currentData.name,
@@ -78,7 +79,7 @@ class WeatherService {
       currentData.main.humidity
     );
   }
-  // TODO: Complete buildForecastArray method
+  // Completes buildForecastArray method
   private buildForecastArray(
     currentWeather: Weather,
     forecastData: any[]
@@ -100,7 +101,7 @@ class WeatherService {
     console.log(forecast);
     return forecast;
   }
-  // TODO: Complete getWeatherForCity method
+  // Completes getWeatherForCity method
   async getWeatherForCity(city: string) {
     this.city = city;
     const cityResult = await this.fetchWeatherData(city);

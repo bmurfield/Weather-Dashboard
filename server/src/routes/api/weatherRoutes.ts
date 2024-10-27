@@ -9,8 +9,8 @@ import weatherService from "../../service/weatherService.js";
 console.log(process.env.API_KEY);
 console.log(process.env.API_BASE_URL);
 
-// TODO: POST Request with city name to retrieve weather data
-// TODO: GET weather data from city name
+// POST Request with city name to retrieve weather data
+// GET weather data from city name
 
 router.post("/search", async (req: Request, res: Response) => {
   const city = req.body.cityName;
@@ -25,21 +25,20 @@ router.post("/search", async (req: Request, res: Response) => {
     console.error(`Failed to search for city: ${city}`, err);
   }
 
-  // TODO: save city to search history
-  router.post('/save', async (_req: Request, res: Response) => {
+  // Save city to search history
+  router.post("/save", async (_req: Request, res: Response) => {
     const city = _req.body.cityName;
-  try{ const savedCity = await HistoryService.addCity(city);
+    try {
+      const savedCity = await HistoryService.addCity(city);
       res.json(savedCity);
     } catch (err) {
       console.error("Failed to save city to history", err);
       res.status(500).json({ error: "Failed to save city" });
     }
   });
+});
 
-  }
-);
-
-// // TODO: GET search history
+// GET search history
 router.get("/history", async (_req: Request, res: Response) => {
   try {
     const history = await HistoryService.getCities();
@@ -50,8 +49,9 @@ router.get("/history", async (_req: Request, res: Response) => {
   }
 });
 
-// // * BONUS TODO: DELETE city from search history
-router.delete("/history/:id", async (req: Request, res: Response) => {const { id } = req.params;
+// DELETE city from search history
+router.delete("/history/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
   try {
     await HistoryService.removeCity(id);
     res.json({ success: true, message: `Deleted city with ID: ${id}` });
