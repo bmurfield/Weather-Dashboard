@@ -22,7 +22,7 @@ A deployed webpage that uses weather apis to show accurate forecast data for mul
 
 The website is deployed using Render. So just follow the link below to access the page.
 
-Link to deployed website: 
+Link to deployed website: https://weather-dashboard-11tr.onrender.com/
 
 ## Usage
 
@@ -30,7 +30,7 @@ The website can be used to search for weather in many major cities around the gl
 
 ## Credits
 
-I used a starter code packafe provided by edX's bootcamp program
+I used a starter code packafe provided by edX's bootcamp program.
 
 ## License
 
