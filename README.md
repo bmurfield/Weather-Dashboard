@@ -30,7 +30,7 @@ The website can be used to search for weather in many major cities around the gl
 
 ## Credits
 
-I used a starter code packafe provided by edX's bootcamp program.
+I used a starter code package provided by edX's bootcamp program.
 
 ## License
 
